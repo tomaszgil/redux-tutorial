@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './Pokemon.css';
-import { pokemonTypesToColors } from "../_utils/Pokemon";
+import './Pokemon.css'
+import { pokemonTypesToColors } from "../../_utils/Pokemon";
 
 class Pokemon extends Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class Pokemon extends Component {
             <span className="type">{this.props.type}</span>
             <span className="id">{this.props.id}</span>
           </span>
-        </div>
+          </div>
       </li>
     );
   }

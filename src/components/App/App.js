@@ -44,7 +44,7 @@ class App extends Component {
     return (
       <div className="app">
         <Logo />
-        <Search isFetched={this.state.isFetched} pokemons={this.allPokemons} />
+        <Search pokemons={this.allPokemons} isFetched={this.state.isFetched} />
       </div>
     );
   }

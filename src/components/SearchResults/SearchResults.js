@@ -18,6 +18,7 @@ const PokemonContainer = ({ pokemons, isFetched, onPokemonCheck }) => {
       {pokemonsComponents}
     </ul>
   );
+
 };
 
 export default PokemonContainer;

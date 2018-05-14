@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Menu.css';
 import CustomCheckbox from './../CustomCheckbox/CustomCheckbox';
-import filters from './../_utils/Filters';
+import filters from './../../_utils/Filters';
 
 class Menu extends Component {
   constructor(props) {

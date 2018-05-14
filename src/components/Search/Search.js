@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Menu from '../Menu/Menu';
+import Filter from '../Filter/Filter';
 import SearchInput from '../SearchInput/SearchInput';
 import SearchResults from '../SearchResults/SearchResults';
-import filters from '../_utils/Filters';
+import { pokemonTypes } from '../../_utils/Pokemon';
+import filters from '../../_utils/Filters';
 
 class Search extends Component {
   constructor(props) {
@@ -20,18 +22,24 @@ class Search extends Component {
         direction: 'ascending'
       },
       filter: {
+        types: pokemonTypes,
         collected: filters.SHOW_ALL
       }
     };
 
     this.handleSorting = this.handleSorting.bind(this);
     this.handleSearchQuery = this.handleSearchQuery.bind(this);
+    this.handleFilterTypes = this.handleFilterTypes.bind(this);
     this.handleFilterCollected = this.handleFilterCollected.bind(this);
     this.handlePokemonStateChange = this.handlePokemonStateChange.bind(this);
     this.sort = this.sort.bind(this);
     this.processSearchQuery = this.processSearchQuery.bind(this);
     this.applyFilters = this.applyFilters.bind(this);
     this.updateResults = this.updateResults.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateResults();
   }
 
   componentWillReceiveProps(nextProps){
@@ -41,14 +49,19 @@ class Search extends Component {
     }
   }
 
+  handlePokemonStateChange(id) {
+    const pokemon = this.allPokemons.find(pokemon => pokemon.id === id);
+    pokemon.collected = !pokemon.collected;
+  }
+
   handleSearchQuery(query) {
     this.criteria.searchQuery = query;
     this.updateResults();
   }
 
-  handlePokemonStateChange(id) {
-    const pokemon = this.allPokemons.find(pokemon => pokemon.id === id);
-    pokemon.collected = !pokemon.collected;
+  handleFilterTypes(types) {
+    this.criteria.filter.types = types;
+    this.updateResults();
   }
 
   handleFilterCollected(filter) {
@@ -81,24 +94,6 @@ class Search extends Component {
     });
   }
 
-// TODO Step 6.
-// TODO 6.1. To Search component add a new field in search criteria which will store array of currently chosen pokemon types.
-// TODO      You can import types from _utils/Filters.js file.
-// TODO 6.2. Add a function that will take care of updating this field.
-// TODO 6.3. Add or modify a function to filter given array upon selected types.
-
-  applyFilters(arr) {
-    let result = [];
-    switch(this.criteria.filter.collected) {
-      case filters.SHOW_ALL: result = arr; break;
-      case filters.ONLY_COLLECTED: result = arr.filter(el => el.collected); break;
-      case filters.NOT_COLLECTED: result = arr.filter(el => !el.collected); break;
-      default: result = arr;
-    }
-
-    return result;
-  }
-
   processSearchQuery(arr) {
     const template = this.criteria.searchQuery.toLowerCase();
     const fields = ['name', 'type', 'id'];
@@ -112,10 +107,23 @@ class Search extends Component {
     });
   }
 
+  applyFilters(arr) {
+    let result = [];
+    switch(this.criteria.filter.collected) {
+      case filters.SHOW_ALL: result = arr; break;
+      case filters.ONLY_COLLECTED: result = arr.filter(el => el.collected); break;
+      case filters.NOT_COLLECTED: result = arr.filter(el => !el.collected); break;
+      default: result = arr;
+    }
+
+    result = result.filter(pokemon => this.criteria.filter.types.includes(pokemon.type));
+    return result;
+  }
+
   updateResults() {
     let result = this.applyFilters(this.allPokemons);
-    result = this.processSearchQuery(result);
-    result = this.sort(result);
+        result = this.processSearchQuery(result);
+        result = this.sort(result);
 
     this.setState({
       pokemons: result
@@ -127,8 +135,10 @@ class Search extends Component {
       <div>
         <SearchInput onChange={this.handleSearchQuery} />
         <Menu onFilterChange={this.handleFilterCollected} onSortChange={this.handleSorting} />
+        <Filter onChange={this.handleFilterTypes} />
         <SearchResults pokemons={this.state.pokemons} isFetched={this.props.isFetched} onPokemonCheck={this.handlePokemonStateChange} />
       </div>
+
     );
   }
 }
