@@ -1,4 +1,4 @@
-export const pokemonTypes = [
+export const PokemonTypes = [
   'bug',
   'dragon',
   'ice',
@@ -16,7 +16,7 @@ export const pokemonTypes = [
   'water'
 ];
 
-export const pokemonTypesToColors = {
+export const PokemonTypesToColors = {
   'bug': '#e0e5c3',
   'dragon': '#c8b1db',
   'ice': '#d4f8f9',

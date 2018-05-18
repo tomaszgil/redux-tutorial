@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Filter.css';
-import { pokemonTypes, pokemonTypesToColors } from "../../_utils/Pokemon";
+import { PokemonTypes, PokemonTypesToColors } from "../../_utils/Pokemon";
 
 class Filter extends Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class Filter extends Component {
 
     this.state = {
       showMenu: false,
-      typeFilters: new Set(pokemonTypes)
+      typeFilters: new Set(PokemonTypes)
     };
 
     this.toggleFilter = this.toggleFilter.bind(this);
@@ -54,10 +54,10 @@ class Filter extends Component {
               <span className="category-title">Pokemon Type</span>
               <span className="category-items">
               {
-                pokemonTypes.map(type => <div
+                PokemonTypes.map(type => <div
                     key={type}
                     data-name={type}
-                    style={{backgroundColor: pokemonTypesToColors[type], border: `2px solid ${pokemonTypesToColors[type]}`}}
+                    style={{backgroundColor: PokemonTypesToColors[type], border: `2px solid ${PokemonTypesToColors[type]}`}}
                     onClick={this.applyFilter}>{type}
                   </div>)
               }

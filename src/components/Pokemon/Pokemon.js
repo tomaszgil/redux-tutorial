@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Pokemon.css'
-import { pokemonTypesToColors } from "../../_utils/Pokemon";
+import { PokemonTypesToColors } from "../../_utils/Pokemon";
 
 class Pokemon extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class Pokemon extends Component {
 
   render() {
     const style = {
-      background: pokemonTypesToColors[this.props.type]
+      background: PokemonTypesToColors[this.props.type]
     };
 
     return (

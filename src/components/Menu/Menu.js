@@ -1,34 +1,21 @@
 import React, { Component } from 'react';
 import './Menu.css';
 import CustomCheckbox from './../CustomCheckbox/CustomCheckbox';
-import filters from './../../_utils/Filters';
+import VisibilityFilters from './../../_utils/VisibilityFilters';
 
 class Menu extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      filterChecked: filters.SHOW_ALL
-    };
-
     this.filtersList = [
-      filters.SHOW_ALL,
-      filters.ONLY_COLLECTED,
-      filters.NOT_COLLECTED
+      VisibilityFilters.SHOW_ALL,
+      VisibilityFilters.ONLY_COLLECTED,
+      VisibilityFilters.NOT_COLLECTED
     ];
 
     this.sortingCategory = React.createRef();
     this.sortingDirection = React.createRef();
-    this.handleCheckboxClick = this.handleCheckboxClick.bind(this);
     this.handleSortingOptionChange = this.handleSortingOptionChange.bind(this);
-  }
-
-  handleCheckboxClick(filter) {
-    this.setState({
-      filterChecked: filter
-    });
-
-    this.props.onFilterChange(filter);
   }
 
   handleSortingOptionChange() {
@@ -42,12 +29,9 @@ class Menu extends Component {
       <div className="menu">
         <form className="categories" onSubmit={(e) => e.preventDefault()}>
           {
-            this.filtersList.map((label, index) => {
-              const checked = label === this.state.filterChecked;
-              return (
-                <CustomCheckbox key={index} id={label} checked={checked} label={label} onClick={this.handleCheckboxClick} />
-              );
-            })
+            this.filtersList.map((label, index) => (
+              <CustomCheckbox key={index} id={label} label={label} />
+            ))
           }
         </form>
         <div className="sort-by">

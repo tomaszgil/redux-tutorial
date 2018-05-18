@@ -3,8 +3,7 @@ import Menu from '../Menu/Menu';
 import Filter from '../Filter/Filter';
 import SearchInput from '../SearchInput/SearchInput';
 import SearchResults from '../SearchResults/SearchResults';
-import { pokemonTypes } from '../../_utils/Pokemon';
-import filters from '../../_utils/Filters';
+import { PokemonTypes } from '../../_utils/Pokemon';
 
 class Search extends Component {
   constructor(props) {
@@ -22,15 +21,13 @@ class Search extends Component {
         direction: 'ascending'
       },
       filter: {
-        types: pokemonTypes,
-        collected: filters.SHOW_ALL
+        types: PokemonTypes
       }
     };
 
     this.handleSorting = this.handleSorting.bind(this);
     this.handleSearchQuery = this.handleSearchQuery.bind(this);
     this.handleFilterTypes = this.handleFilterTypes.bind(this);
-    this.handleFilterCollected = this.handleFilterCollected.bind(this);
     this.handlePokemonStateChange = this.handlePokemonStateChange.bind(this);
     this.sort = this.sort.bind(this);
     this.processSearchQuery = this.processSearchQuery.bind(this);
@@ -42,7 +39,7 @@ class Search extends Component {
     this.updateResults();
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     if (nextProps.isFetched) {
       this.allPokemons = nextProps.pokemons;
       this.updateResults();
@@ -61,11 +58,6 @@ class Search extends Component {
 
   handleFilterTypes(types) {
     this.criteria.filter.types = types;
-    this.updateResults();
-  }
-
-  handleFilterCollected(filter) {
-    this.criteria.filter.collected = filter;
     this.updateResults();
   }
 
@@ -108,16 +100,7 @@ class Search extends Component {
   }
 
   applyFilters(arr) {
-    let result = [];
-    switch(this.criteria.filter.collected) {
-      case filters.SHOW_ALL: result = arr; break;
-      case filters.ONLY_COLLECTED: result = arr.filter(el => el.collected); break;
-      case filters.NOT_COLLECTED: result = arr.filter(el => !el.collected); break;
-      default: result = arr;
-    }
-
-    result = result.filter(pokemon => this.criteria.filter.types.includes(pokemon.type));
-    return result;
+    return arr.filter(pokemon => this.criteria.filter.types.includes(pokemon.type));
   }
 
   updateResults() {
@@ -134,13 +117,13 @@ class Search extends Component {
     return (
       <div>
         <SearchInput onChange={this.handleSearchQuery} />
-        <Menu onFilterChange={this.handleFilterCollected} onSortChange={this.handleSorting} />
+        <Menu onSortChange={this.handleSorting} />
         <Filter onChange={this.handleFilterTypes} />
         <SearchResults pokemons={this.state.pokemons} isFetched={this.props.isFetched} onPokemonCheck={this.handlePokemonStateChange} />
       </div>
-
     );
   }
 }
+
 
 export default Search;

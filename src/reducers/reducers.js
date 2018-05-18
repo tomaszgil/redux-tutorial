@@ -1,24 +1,31 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
+import VisibilityFilters from '../_utils/VisibilityFilters';
+import { PokemonTypes } from '../_utils/Pokemon';
+import { SET_VISIBILITY_FILTER } from "../actions/actions";
 
-import {
-  SET_VISIBILITY_FILTER,
-} from '../actions/actions.js';
+const { SHOW_ALL } = VisibilityFilters;
 
-import Filters from '../_utils/Filters';
-
-const { SHOW_ALL } = Filters;
-​
 const visibilityFilter = (state = SHOW_ALL, action) => {
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
-      return action.filter;
+      return action.visibilityFilter;
     default:
       return state;
   }
 };
-​
-const pokedexApp = combineReducers({
-  visibilityFilter: visibilityFilter
+
+const typeFilters = (state = PokemonTypes, action) => {
+  switch (action.type) {
+    case SET_VISIBILITY_FILTER:
+      return action.visibilityFilter;
+    default:
+      return state;
+  }
+};
+
+const pokedexReducer = combineReducers({
+  visibilityFilter,
+  typeFilters
 });
-​
-export default pokedexApp;
+
+export default pokedexReducer;
