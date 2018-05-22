@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Logo from '../Logo/Logo';
-import Search from '../Search/Search';
+import Menu from '../Menu/Menu';
+import Filter from '../Filter/Filter';
+import SearchInput from '../SearchInput/SearchInput';
+import SearchResults from '../SearchResults/SearchResults';
 import './App.css';
 
 class App extends Component {
@@ -44,7 +47,10 @@ class App extends Component {
     return (
       <div className="app">
         <Logo />
-        <Search pokemons={this.allPokemons} isFetched={this.state.isFetched} />
+        <SearchInput />
+        <Menu />
+        <Filter />
+        <SearchResults pokemons={this.allPokemons} isFetched={this.state.isFetched} onPokemonCheck={this.handlePokemonStateChange} />
       </div>
     );
   }

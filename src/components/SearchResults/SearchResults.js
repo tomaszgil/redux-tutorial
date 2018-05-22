@@ -1,48 +1,51 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Pokemon from '../Pokemon/Pokemon';
-import VisibilityFilters from '../../_utils/VisibilityFilters';
 import './SearchResults.css';
+import SearchEngine from "../../utils/SearchEngine";
+import Loader from "../Loader/Loader";
 
 const mapStateToProps = state => ({
-  visibilityFilter: state.visibilityFilter
+  searchQuery: state.searchQuery,
+  visibilityFilter: state.visibilityFilter,
+  typeFilters: state.typeFilters,
+  sortProperties: state.sortProperties,
+  pokemons: state.pokemons,
+  isFetched: state.isFetched
 });
 
 class SearchResultsConnected extends Component {
   constructor(props) {
     super(props);
-    this.displayedPokemons = this.props.pokemons;
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.updateResults(nextProps.pokemons);
-  }
+  prepareResults() {
+    const criteria = {
+      searchQuery: this.props.searchQuery,
+      sort: {
+        key: this.props.sortProperties.key,
+        direction: this.props.sortProperties.direction
+      },
+      typeFilters: this.props.typeFilters,
+      visibilityFilter: this.props.visibilityFilter
+    };
 
-  updateResults(pokemons) {
-    let result = [];
-    switch (this.props.visibilityFilter) {
-      case VisibilityFilters.SHOW_ALL: result = pokemons; break;
-      case VisibilityFilters.ONLY_COLLECTED: result = pokemons.filter(el => el.collected); break;
-      case VisibilityFilters.NOT_COLLECTED: result = pokemons.filter(el => !el.collected); break;
-      default: result = pokemons; break;
-    }
-
-    this.displayedPokemons = result;
+    const searchEngine = new SearchEngine(this.props.pokemons);
+    return searchEngine.apply(criteria);
   }
 
   render() {
     if (!this.props.isFetched)
-      return (
-        <div className="pokemon-container-loading">
-          <div className="pokemon" />
-        </div>
-      );
+      return <Loader />;
 
+    const pokemons = this.prepareResults();
     return (
       <ul className="pokemon-container">
         {
-          this.displayedPokemons
-            .map(pokemon => <Pokemon key={pokemon.id} {...pokemon} onPokemonCheck={this.props.onPokemonCheck} />)
+          pokemons
+            .map(pokemon => (
+              <Pokemon key={pokemon.id} {...pokemon} />
+            ))
         }
       </ul>
     );
