@@ -2,10 +2,9 @@ import { createStore, applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import pokedexReducer from '../reducers/reducers';
 
-const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
-const store = createStoreWithMiddleware(pokedexReducer);
+const DEBUG_SETTINGS = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
-// TODO Debug purposes, remove later
-window.store = store;
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
+const store = createStoreWithMiddleware(pokedexReducer, DEBUG_SETTINGS);
 
 export default store;
