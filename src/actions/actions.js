@@ -1,4 +1,8 @@
 export const FETCH_POKEMONS = 'FETCH_POKEMONS';
+export const FETCH_POKEMONS_PENDING = 'FETCH_POKEMONS_PENDING';
+export const FETCH_POKEMONS_FULFILLED = 'FETCH_POKEMONS_FULFILLED';
+export const FETCH_POKEMONS_REJECTED = 'FETCH_POKEMONS_REJECTED';
+export const SET_FETCHED = 'SET_FETCHED';
 export const SET_SEARCH_QUERY = 'SET_SEARCH_QUERY';
 export const SET_SORT_KEY = 'SET_SORT_KEY';
 export const SET_SORT_DIRECTION = 'SET_SORT_DIRECTION';
@@ -6,8 +10,14 @@ export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const ADD_TYPE_FILTER = 'ADD_TYPE_FILTERS';
 export const REMOVE_TYPE_FILTER = 'REMOVE_TYPE_FILTERS';
 
-export const fetchPokemons = () => ({
-  type: FETCH_POKEMONS
+export const fetchPokemons = (promise) => ({
+  type: FETCH_POKEMONS,
+  payload: promise
+});
+
+export const setFetched = (fetched) => ({
+  type: SET_FETCHED,
+  isFetched: fetched
 });
 
 export const setSearchQuery = (query) => ({

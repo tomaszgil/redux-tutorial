@@ -56,7 +56,7 @@ export default class SearchEngine {
       default: result = arr; break;
     }
 
-    return arr.filter(pokemon => this.criteria.typeFilters.includes(pokemon.type));
+    return result.filter(pokemon => this.criteria.typeFilters.includes(pokemon.type));
   }
 
   apply(criteria) {
