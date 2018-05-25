@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import './SearchInput.css';
+import { setSearchQuery } from "../../actions/actions";
+import { connect } from 'react-redux';
 
-class SearchInput extends Component {
+const mapDispatchToProps = dispatch => ({
+  setSearchQuery: query => dispatch(setSearchQuery(query))
+});
+
+class SearchInputConnected extends Component {
   constructor(props) {
     super(props);
     this.state = { value: '' };
@@ -13,7 +19,7 @@ class SearchInput extends Component {
   handleChange(e) {
     const query = e.target.value;
     this.setState({ value: query });
-    this.props.onChange(query);
+    this.props.setSearchQuery(query);
   }
 
   handleClear(e) {
@@ -21,7 +27,7 @@ class SearchInput extends Component {
     this.setState({
       value: ''
     });
-    this.props.onChange('');
+    this.props.setSearchQuery('');
   }
 
   render() {
@@ -36,5 +42,7 @@ class SearchInput extends Component {
     );
   }
 }
+
+const SearchInput = connect(null, mapDispatchToProps)(SearchInputConnected);
 
 export default SearchInput;

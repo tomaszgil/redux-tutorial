@@ -9,19 +9,15 @@ export const SET_SORT_DIRECTION = 'SET_SORT_DIRECTION';
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const ADD_TYPE_FILTER = 'ADD_TYPE_FILTERS';
 export const REMOVE_TYPE_FILTER = 'REMOVE_TYPE_FILTERS';
+export const TOGGLE_POKEMON_COLLECTED = 'TOGGLE_POKEMON_COLLECTED';
 
 export const fetchPokemons = (promise) => ({
   type: FETCH_POKEMONS,
   payload: promise
 });
 
-export const setFetched = (fetched) => ({
-  type: SET_FETCHED,
-  isFetched: fetched
-});
-
 export const setSearchQuery = (query) => ({
-  type: SET_VISIBILITY_FILTER,
+  type: SET_SEARCH_QUERY,
   searchQuery: query
 });
 
@@ -48,4 +44,9 @@ export const addTypeFilter = (filter) => ({
 export const removeTypeFilter = (filter) => ({
   type: REMOVE_TYPE_FILTER,
   filter: filter
+});
+
+export const togglePokemonCollected = (id) => ({
+  type: TOGGLE_POKEMON_COLLECTED,
+  id: id
 });

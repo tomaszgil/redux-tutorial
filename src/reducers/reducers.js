@@ -10,7 +10,8 @@ import {
   SET_SORT_DIRECTION,
   SET_VISIBILITY_FILTER,
   ADD_TYPE_FILTER,
-  REMOVE_TYPE_FILTER
+  REMOVE_TYPE_FILTER,
+  TOGGLE_POKEMON_COLLECTED
 } from "../actions/actions";
 
 const { SHOW_ALL } = VisibilityFilters;
@@ -19,6 +20,11 @@ const pokemons = (state = [], action) => {
   switch (action.type) {
     case FETCH_POKEMONS_FULFILLED:
       return action.payload;
+    case TOGGLE_POKEMON_COLLECTED:
+      const pokemon = state.find(el => el.id === action.id);
+      const newPokemon = Object.assign({}, pokemon, {collected: !pokemon.collected});
+      const index = state.indexOf(pokemon);
+      return Object.assign([], state, {[index]: newPokemon});
     default:
       return state;
   }
@@ -42,13 +48,18 @@ const searchQuery = (state = '', action) => {
   }
 };
 
-// TODO initial sort properties constant
 const sortProperties = (state = { key: 'id', direction: 'ascending' }, action) => {
   switch (action.type) {
     case SET_SORT_KEY:
-      return action.sortKey;
+      return {
+        key: action.sortKey,
+        direction: state.direction
+      };
     case SET_SORT_DIRECTION:
-      return action.sortDirection;
+      return {
+        key: state.key,
+        direction: action.sortDirection
+      };
     default:
       return state;
   }

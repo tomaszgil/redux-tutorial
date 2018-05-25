@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './Menu.css';
 import CustomCheckbox from './../CustomCheckbox/CustomCheckbox';
 import VisibilityFilters from '../../utils/VisibilityFilters';
+import { setSortDirection, setSortKey } from "../../actions/actions";
 
-class Menu extends Component {
+const mapDispatchToProps = dispatch => ({
+  setSortKey: key => dispatch(setSortKey(key)),
+  setSortDirection: direction => dispatch(setSortDirection(direction))
+});
+
+class ConnectedMenu extends Component {
   constructor(props) {
     super(props);
 
@@ -15,13 +22,19 @@ class Menu extends Component {
 
     this.sortingCategory = React.createRef();
     this.sortingDirection = React.createRef();
-    this.handleSortingOptionChange = this.handleSortingOptionChange.bind(this);
+    this.handleSortKeyChange = this.handleSortKeyChange.bind(this);
+    this.handleSortDirectionChange = this.handleSortDirectionChange.bind(this);
   }
 
-  handleSortingOptionChange() {
+  handleSortKeyChange() {
     const category = this.sortingCategory.current.value;
+    console.log(category);
+    this.props.setSortKey(category);
+  }
+
+  handleSortDirectionChange() {
     const direction = this.sortingDirection.current.value;
-    this.props.onSortChange(category, direction);
+    this.props.setSortDirection(direction);
   }
 
   render() {
@@ -36,12 +49,12 @@ class Menu extends Component {
         </form>
         <div className="sort-by">
           <div className="sorting-title">Sort by</div>
-          <select className="sorting-category" ref={this.sortingCategory} onChange={this.handleSortingOptionChange}>
+          <select className="sorting-category" ref={this.sortingCategory} onChange={this.handleSortKeyChange}>
             <option value="id">id</option>
             <option value="name">name</option>
             <option value="type">type</option>
           </select>
-          <select className="sorting-direction" ref={this.sortingDirection} onChange={this.handleSortingOptionChange}>
+          <select className="sorting-direction" ref={this.sortingDirection} onChange={this.handleSortDirectionChange}>
             <option value="ascending">low to high</option>
             <option value="descending">high to low</option>
           </select>
@@ -50,5 +63,7 @@ class Menu extends Component {
     );
   }
 }
+
+const Menu = connect(null, mapDispatchToProps)(ConnectedMenu);
 
 export default Menu;

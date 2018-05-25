@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './Pokemon.css'
 import { PokemonTypesToColors } from "../../utils/Pokemon";
+import {togglePokemonCollected} from "../../actions/actions";
 
-class Pokemon extends Component {
+const mapDispatchToProps = dispatch => ({
+  togglePokemonCollected: id => dispatch(togglePokemonCollected(id))
+});
+
+class PokemonConnected extends Component {
   constructor(props) {
     super(props);
 
@@ -20,7 +26,7 @@ class Pokemon extends Component {
       collected: !this.state.collected
     });
 
-    this.props.onPokemonCheck(this.props.id);
+    this.props.togglePokemonCollected(this.props.id);
   }
 
   render() {
@@ -46,5 +52,7 @@ class Pokemon extends Component {
     );
   }
 }
+
+const Pokemon = connect(null, mapDispatchToProps)(PokemonConnected);
 
 export default Pokemon;

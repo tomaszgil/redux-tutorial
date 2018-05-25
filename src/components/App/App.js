@@ -24,7 +24,7 @@ class ConnectedApp extends Component {
   }
 
   componentDidMount() {
-    const pokemons = fetch(`https://api.mlab.com/api/1/databases/pokedex/collections/pokemons?apiKey=${this.apiAccessKey}`)
+    const promise = fetch(`https://api.mlab.com/api/1/databases/pokedex/collections/pokemons?apiKey=${this.apiAccessKey}`)
       .then(blob => blob.json())
       .then(data => {
         return data.map(element => ({
@@ -36,7 +36,7 @@ class ConnectedApp extends Component {
         }));
       });
 
-    this.props.fetchPokemons(pokemons);
+    this.props.fetchPokemons(promise);
   }
 
   render() {
