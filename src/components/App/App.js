@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import Logo from '../Logo/Logo';
 import Menu from '../Menu/Menu';
 import Filter from '../Filter/Filter';
-import SearchResults from '../SearchResults/SearchResults';
 import './App.css';
-import { fetchPokemons } from "../../actions/actions";
-import SearchInputConnected from "../../containers/SearchInputConnected";
+import { fetchPokemons } from '../../actions/actions';
+import SearchInputConnected from '../../containers/SearchInputConnected';
+import SearchResultsConnected from '../../containers/SearchResultsConnected';
 
 const mapDispatchToProps = dispatch => ({
   fetchPokemons: pokemons => dispatch(fetchPokemons(pokemons))
@@ -16,7 +16,7 @@ class ConnectedApp extends Component {
   constructor(props) {
     super(props);
 
-    this.apiAccessKey = "RZxUI6ohr3E8hmBGY6HDPlRWpXmVhzgh";
+    this.apiAccessKey = 'RZxUI6ohr3E8hmBGY6HDPlRWpXmVhzgh';
 
     this.state = {
       isFetched: false
@@ -46,7 +46,7 @@ class ConnectedApp extends Component {
         <SearchInputConnected />
         <Menu />
         <Filter />
-        <SearchResults />
+        <SearchResultsConnected />
       </div>
     );
   }
