@@ -1,58 +1,38 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './Pokemon.css'
-import { PokemonTypesToColors } from "../../utils/Pokemon";
-import {togglePokemonCollected} from "../../actions/actions";
+import { PokemonTypesToColors } from '../../utils/Pokemon';
 
-const mapDispatchToProps = dispatch => ({
-  togglePokemonCollected: id => dispatch(togglePokemonCollected(id))
-});
+const Pokemon = (props) => {
+  const style = {
+    background: PokemonTypesToColors[props.type]
+  };
 
-class PokemonConnected extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      collected: this.props.collected
-    };
-
-    this.handlePokeballClick = this.handlePokeballClick.bind(this);
-  }
-
-  handlePokeballClick(e) {
-    e.preventDefault();
-
-    this.setState({
-      collected: !this.state.collected
-    });
-
-    this.props.togglePokemonCollected(this.props.id);
-  }
-
-  render() {
-    const style = {
-      background: PokemonTypesToColors[this.props.type]
-    };
-
-    return (
-      <li className={this.state.collected ? "pokemon collected" : "pokemon"}>
-        <div className="wrapper">
-          <div className="img-background" style={style}/>
-          <img src={this.props.img}/>
+  return (
+    <li className={props.collected ? "pokemon collected" : "pokemon"}>
+      <div className="wrapper">
+        <div className="img-background" style={style}/>
+        <img src={props.img}/>
+      </div>
+      <div className="information">
+        <a href="#" className="pokeball" onClick={() => props.onPokeballClick(props.id)}/>
+        <span className="name">{props.name}</span>
+        <span>
+          <span className="type">{props.type}</span>
+          <span className="id">{props.id}</span>
+        </span>
         </div>
-        <div className="information">
-          <a href="#" className="pokeball" onClick={this.handlePokeballClick}/>
-          <span className="name">{this.props.name}</span>
-          <span>
-            <span className="type">{this.props.type}</span>
-            <span className="id">{this.props.id}</span>
-          </span>
-          </div>
-      </li>
-    );
-  }
-}
+    </li>
+  );
+};
 
-const Pokemon = connect(null, mapDispatchToProps)(PokemonConnected);
+Pokemon.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+  collected: PropTypes.bool,
+  onPokeballClick: PropTypes.func
+};
 
 export default Pokemon;

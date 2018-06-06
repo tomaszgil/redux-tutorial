@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './SearchInput.css';
 
-
 class SearchInput extends Component {
   constructor(props) {
     super(props);
@@ -25,9 +24,15 @@ class SearchInput extends Component {
     return (
       <form className="search" onSubmit={(e) => e.preventDefault()}>
         <div className="search-box">
-          <input type="text" placeholder="Search" value={this.props.searchQuery} onChange={this.handleChange}/>
+          <input
+            type="text"
+            placeholder="Search"
+            value={this.props.searchQuery}
+            onChange={this.handleChange}/>
           <div className="icon" />
-          <a href="#" className={this.props.searchQuery !== '' ? "clear visible" : "clear"}  onClick={this.handleClear} />
+          <a href="#"
+             className={this.props.searchQuery !== '' ? "clear visible" : "clear"}
+             onClick={this.handleClear} />
         </div>
       </form>
     );

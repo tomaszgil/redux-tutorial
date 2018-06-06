@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SearchEngine from '../utils/SearchEngine';
 import Loader from '../components/Loader/Loader';
-import SearchResults from "../components/SearchResults/SearchResults";
+import SearchResults from '../components/SearchResults/SearchResults';
 
 const mapStateToProps = state => ({
   searchQuery: state.searchQuery,
