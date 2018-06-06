@@ -2,9 +2,7 @@ import { combineReducers } from 'redux';
 import VisibilityFilters from '../utils/VisibilityFilters';
 import { PokemonTypes } from '../utils/Pokemon';
 import {
-  FETCH_POKEMONS_PENDING,
   FETCH_POKEMONS_FULFILLED,
-  FETCH_POKEMONS_REJECTED,
   SET_SEARCH_QUERY,
   SET_SORT_KEY,
   SET_SORT_DIRECTION,
