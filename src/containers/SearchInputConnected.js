@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { setSearchQuery } from '../actions/actions';
 import { connect } from 'react-redux';
 import SearchInput from '../components/SearchInput/SearchInput';
@@ -11,9 +11,9 @@ const mapDispatchToProps = dispatch => ({
   setSearchQuery: query => dispatch(setSearchQuery(query))
 });
 
-const Container = (props) => {
-  return <SearchInput setSearchQuery={props.setSearchQuery} searchQuery={props.searchQuery} />;
-};
+const Container = (props) => (
+  <SearchInput setSearchQuery={props.setSearchQuery} searchQuery={props.searchQuery} />
+);
 
 const SearchInputConnected = connect(mapStateToProps, mapDispatchToProps)(Container);
 

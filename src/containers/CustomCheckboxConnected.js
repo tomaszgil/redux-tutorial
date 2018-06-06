@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { setVisibilityFilter } from "../actions/actions";
 import CustomCheckbox from "../components/CustomCheckbox/CustomCheckbox";

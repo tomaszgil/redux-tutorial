@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CustomCheckboxConnected from "../../containers/CustomCheckboxConnected";
 import VisibilityFilters from "../../utils/VisibilityFilters";
 import './VisibilityFiltersBox.css';

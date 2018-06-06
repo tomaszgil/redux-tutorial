@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { togglePokemonCollected } from '../actions/actions';
 import Pokemon from '../components/Pokemon/Pokemon';

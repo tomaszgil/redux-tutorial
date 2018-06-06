@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { addTypeFilter, removeTypeFilter } from "../actions/actions";
-import { PokemonTypes, PokemonTypesToColors } from "../utils/Pokemon";
 import FilterTray from "../components/FilterTray/FilterTray";
 
 const mapStateToProps = state => ({

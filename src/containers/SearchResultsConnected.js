@@ -14,10 +14,6 @@ const mapStateToProps = state => ({
 });
 
 class Container extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   prepareResults() {
     const criteria = {
       searchQuery: this.props.searchQuery,
