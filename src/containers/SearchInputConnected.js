@@ -12,7 +12,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const container = (props) => {
-  return <SearchInput setSearchQuery={props.setSearchQuery} />;
+  return <SearchInput setSearchQuery={props.setSearchQuery} searchQuery={props.searchQuery} />;
 };
 
 const SearchInputConnected = connect(mapStateToProps, mapDispatchToProps)(container);

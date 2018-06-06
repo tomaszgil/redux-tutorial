@@ -35,8 +35,8 @@ class SearchInput extends Component {
 }
 
 SearchInput.propTypes = {
-  searchQuery: PropTypes.string,
-  setSearchQuery: PropTypes.func
+  searchQuery: PropTypes.string.isRequired,
+  setSearchQuery: PropTypes.func.isRequired
 };
 
 export default SearchInput;
