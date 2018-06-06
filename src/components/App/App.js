@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Logo from '../Logo/Logo';
 import Menu from '../Menu/Menu';
-import Filter from '../Filter/Filter';
 import './App.css';
 import { fetchPokemons } from '../../actions/actions';
 import SearchInputConnected from '../../containers/SearchInputConnected';
 import SearchResultsConnected from '../../containers/SearchResultsConnected';
+import FilterTrayConnected from "../../containers/FilterTrayConnected";
 
 const mapDispatchToProps = dispatch => ({
   fetchPokemons: pokemons => dispatch(fetchPokemons(pokemons))
@@ -45,7 +45,7 @@ class ConnectedApp extends Component {
         <Logo />
         <SearchInputConnected />
         <Menu />
-        <Filter />
+        <FilterTrayConnected />
         <SearchResultsConnected />
       </div>
     );

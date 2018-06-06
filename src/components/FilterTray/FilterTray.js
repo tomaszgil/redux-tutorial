@@ -1,28 +1,15 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { addTypeFilter, removeTypeFilter } from "../../actions/actions";
+import PropTypes from 'prop-types';
 import { PokemonTypes, PokemonTypesToColors } from "../../utils/Pokemon";
-import './Filter.css';
+import './FilterTray.css';
 
-const mapStateToProps = state => ({
-  typeFilters: state.typeFilters
-});
-
-const mapDispatchToProps = dispatch => ({
-  addTypeFilter: filter => dispatch(addTypeFilter(filter)),
-  removeTypeFilter: filter => dispatch(removeTypeFilter(filter))
-});
-
-class ConnectedFilter extends Component {
+class FilterTray extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       showMenu: false
     };
-
-    this.toggleFilter = this.toggleFilter.bind(this);
-    this.applyFilter = this.applyFilter.bind(this);
   }
 
   toggleFilter() {
@@ -35,19 +22,16 @@ class ConnectedFilter extends Component {
     const filterElement = e.target;
     const filterName = filterElement.dataset.name;
 
-    if (this.props.typeFilters.includes(filterName)) {
-      this.props.removeTypeFilter(filterName);
-      filterElement.classList.add('disabled');
-    } else {
-      this.props.addTypeFilter(filterName);
-      filterElement.classList.remove('disabled');
-    }
+    if (this.props.filters.includes(filterName))
+      this.props.removeFilter(filterName);
+    else
+      this.props.addFilter(filterName);
   }
 
   render() {
     return (
       <div className="filter">
-        <div className="toggle-filter" onClick={this.toggleFilter}>
+        <div className="toggle-filter" onClick={() => this.toggleFilter()}>
           <span className="filter-icon" />
           <span className="filter-text">Filter Pokedex</span>
         </div>
@@ -58,12 +42,15 @@ class ConnectedFilter extends Component {
               <span className="category-title">Pokemon Type</span>
               <span className="category-items">
               {
-                PokemonTypes.map(type => <div
+                PokemonTypes.map(type => (
+                  <div
                     key={type}
                     data-name={type}
+                    className={this.props.filters.includes(type) ? null : 'disabled'}
                     style={{backgroundColor: PokemonTypesToColors[type], border: `2px solid ${PokemonTypesToColors[type]}`}}
-                    onClick={this.applyFilter}>{type}
-                  </div>)
+                    onClick={(e) => this.applyFilter(e)}>{type}
+                  </div>
+                ))
               }
               </span>
             </div>
@@ -74,6 +61,10 @@ class ConnectedFilter extends Component {
   }
 }
 
-const Filter = connect(mapStateToProps, mapDispatchToProps)(ConnectedFilter);
+FilterTray.propTypes = {
+  filters: PropTypes.array,
+  addFilter: PropTypes.func,
+  removeFilter: PropTypes.func
+};
 
-export default Filter;
+export default FilterTray;

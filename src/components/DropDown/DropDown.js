@@ -22,7 +22,7 @@ class DropDown extends Component {
         onChange={() => this.handleSortKeyChange()}>
         {
           this.props.options.map(option => (
-            <option value={option}>{option}</option>
+            <option key={option} value={option}>{option}</option>
           ))
         }
       </select>
