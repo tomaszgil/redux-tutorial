@@ -1,4 +1,5 @@
 import VisibilityFilters from './VisibilityFilters';
+import { SortingDirection, SortingKey } from './SortingProperties';
 import { PokemonTypes } from './Pokemon';
 
 export default class SearchEngine {
@@ -7,8 +8,8 @@ export default class SearchEngine {
     this.criteria = {
       searchQuery: '',
       sort: {
-        key: 'id',
-        direction: 'ascending'
+        key: SortingKey.ID,
+        direction: SortingDirection.ASCENDING
       },
       typeFilters: PokemonTypes,
       visibilityFilter: VisibilityFilters.SHOW_ALL
@@ -20,8 +21,8 @@ export default class SearchEngine {
     const key = this.criteria.sort.key;
 
     switch(this.criteria.sort.direction) {
-      case 'ascending': multiplier = 1; break;
-      case 'descending': multiplier = -1; break;
+      case SortingDirection.ASCENDING: multiplier = 1; break;
+      case SortingDirection.DESCENDING: multiplier = -1; break;
       default: break;
     }
 
@@ -36,7 +37,11 @@ export default class SearchEngine {
 
   _processSearchQuery(arr) {
     const template = this.criteria.searchQuery.toLowerCase();
-    const fields = ['name', 'type', 'id'];
+    const fields = [
+      SortingKey.ID,
+      SortingKey.NAME,
+      SortingKey.TYPE
+    ];
 
     return arr.filter(pokemon => {
       for (let field of fields)

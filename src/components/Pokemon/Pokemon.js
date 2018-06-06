@@ -3,28 +3,34 @@ import PropTypes from 'prop-types';
 import './Pokemon.css'
 import { PokemonTypesToColors } from '../../utils/Pokemon';
 
-const Pokemon = (props) => {
-  const style = {
-    background: PokemonTypesToColors[props.type]
-  };
+class Pokemon extends Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <li className={props.collected ? "pokemon collected" : "pokemon"}>
-      <div className="wrapper">
-        <div className="img-background" style={style}/>
-        <img src={props.img}/>
-      </div>
-      <div className="information">
-        <a href="#" className="pokeball" onClick={() => props.onPokeballClick(props.id)}/>
-        <span className="name">{props.name}</span>
-        <span>
-          <span className="type">{props.type}</span>
-          <span className="id">{props.id}</span>
+    this.style = {
+      background: PokemonTypesToColors[props.type]
+    };
+  }
+
+  render() {
+    return (
+      <li className={this.props.collected ? "pokemon collected" : "pokemon"}>
+        <div className="wrapper">
+          <div className="img-background" style={this.style}/>
+          <img src={this.props.img}/>
+        </div>
+        <div className="information">
+          <a href="#" className="pokeball" onClick={() => this.props.onPokeballClick(this.props.id)}/>
+          <span className="name">{this.props.name}</span>
+          <span>
+          <span className="type">{this.props.type}</span>
+          <span className="id">{this.props.id}</span>
         </span>
         </div>
-    </li>
-  );
-};
+      </li>
+    );
+  }
+}
 
 Pokemon.propTypes = {
   id: PropTypes.number.isRequired,

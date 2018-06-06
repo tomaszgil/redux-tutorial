@@ -16,38 +16,6 @@
   margin: 0 -15px;
 }
 
-.menu .categories .custom-checkbox label {
-  font-weight: 600;
-  transition: .5s;
-  cursor: pointer;
-}
-
-.menu .categories .custom-checkbox input {
-  display: none;
-}
-
-.menu .categories .custom-checkbox .radio {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: .15rem solid #bbb;
-  background-color: #e7e6e4;
-  display: inline-block;
-  margin: 0 5px;
-  cursor: pointer;
-  transition: all .3s ease-out;
-}
-
-.menu .categories .custom-checkbox.checked .radio {
-  border-color: #ef52d1;
-  background-color: #ef52d1;
-}
-
-.menu .categories .custom-checkbox:hover,
-.menu .categories .custom-checkbox.checked {
-  color: #2a2825;
-}
-
 .menu .sort-by div {
   padding: 10px;
   margin: 5px;

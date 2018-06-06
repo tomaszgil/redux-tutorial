@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import VisibilityFilters from '../utils/VisibilityFilters';
+import { SortingKey, SortingDirection } from '../utils/SortingProperties';
 import { PokemonTypes } from '../utils/Pokemon';
 import {
   FETCH_POKEMONS_FULFILLED,
@@ -46,7 +47,7 @@ const searchQuery = (state = '', action) => {
   }
 };
 
-const sortProperties = (state = { key: 'id', direction: 'ascending' }, action) => {
+const sortProperties = (state = { key: SortingKey.ID, direction: SortingDirection.ASCENDING }, action) => {
   switch (action.type) {
     case SET_SORT_KEY:
       return {
