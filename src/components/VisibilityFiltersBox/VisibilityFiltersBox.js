@@ -11,7 +11,7 @@ const VisibilityFiltersBox = () => {
   ];
 
   return (
-    <form className="categories" onSubmit={(e) => e.preventDefault()}>
+    <form className="visibility-filters" onSubmit={(e) => e.preventDefault()}>
       {
         filtersList.map((label, index) => (
           <CustomCheckboxConnected key={index} id={label} label={label} />

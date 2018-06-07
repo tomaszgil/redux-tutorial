@@ -1,0 +1,11 @@
+.visibility-filters {
+  display: flex;
+  flex-direction: row;
+  margin: 0 -15px;
+}
+
+@media only screen and (max-width: 768px) {
+  .menu .visibility-filters {
+    flex-direction: column;
+  }
+}

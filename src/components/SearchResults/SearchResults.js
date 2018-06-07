@@ -4,7 +4,7 @@ import './SearchResults.css';
 import PokemonConnected from '../../containers/PokemonConnected';
 
 const SearchResults = (props) => (
-  <ul className="pokemon-container">
+  <ul className="search-results">
     {
       props.pokemons
         .map(pokemon => (
