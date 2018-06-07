@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './SearchResults.css';
-import PokemonConnected from '../../containers/PokemonConnected';
+import PokemonContainer from '../../containers/PokemonContainer';
 
 const SearchResults = (props) => (
   <ul className="search-results">
     {
       props.pokemons
         .map(pokemon => (
-          <PokemonConnected key={pokemon.id} {...pokemon} />
+          <PokemonContainer key={pokemon.id} {...pokemon} />
         ))
     }
   </ul>

@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
   sortDirection: state.sortProperties.direction
 });
 
-const Container = (props) => (
+const SortPropertiesBoxContainer = (props) => (
   <SortPropertiesBox title='Sort by'>
     <DropDown
       selected={props.sortKey}
@@ -28,6 +28,4 @@ const Container = (props) => (
   </SortPropertiesBox>
 );
 
-const SortPropertiesBoxConnected = connect(mapStateToProps, mapDispatchToProps)(Container);
-
-export default SortPropertiesBoxConnected;
+export default connect(mapStateToProps, mapDispatchToProps)(SortPropertiesBoxContainer);

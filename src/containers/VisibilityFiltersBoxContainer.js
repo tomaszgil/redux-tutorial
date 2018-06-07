@@ -13,7 +13,7 @@ const mapDispatchToProps = dispatch => ({
   setVisibilityFilter: filter => dispatch(setVisibilityFilter(filter))
 });
 
-const Container = (props) => {
+const VisibilityFiltersBoxContainer = (props) => {
   const filters = [
     VisibilityFilters.SHOW_ALL,
     VisibilityFilters.ONLY_COLLECTED,
@@ -37,6 +37,4 @@ const Container = (props) => {
   );
 };
 
-const VisibilityFiltersBoxConnected = connect(mapStateToProps, mapDispatchToProps)(Container);
-
-export default VisibilityFiltersBoxConnected;
+export default connect(mapStateToProps, mapDispatchToProps)(VisibilityFiltersBoxContainer);

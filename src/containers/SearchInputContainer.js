@@ -11,10 +11,8 @@ const mapDispatchToProps = dispatch => ({
   setSearchQuery: query => dispatch(setSearchQuery(query))
 });
 
-const Container = (props) => (
+const SearchInputContainer = (props) => (
   <SearchInput setSearchQuery={props.setSearchQuery} searchQuery={props.searchQuery} />
 );
 
-const SearchInputConnected = connect(mapStateToProps, mapDispatchToProps)(Container);
-
-export default SearchInputConnected;
+export default connect(mapStateToProps, mapDispatchToProps)(SearchInputContainer);

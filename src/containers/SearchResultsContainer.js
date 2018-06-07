@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
   isFetched: state.isFetched
 });
 
-class Container extends Component {
+class SearchResultsContainer extends Component {
   prepareResults() {
     const criteria = {
       searchQuery: this.props.searchQuery,
@@ -36,6 +36,4 @@ class Container extends Component {
   }
 }
 
-const SearchResultsConnected = connect(mapStateToProps)(Container);
-
-export default SearchResultsConnected;
+export default connect(mapStateToProps)(SearchResultsContainer);

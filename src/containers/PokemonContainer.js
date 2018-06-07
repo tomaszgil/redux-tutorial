@@ -7,10 +7,8 @@ const mapDispatchToProps = dispatch => ({
   onPokeballClick: id => dispatch(togglePokemonCollected(id))
 });
 
-const Container = (props) => (
+const PokemonContainer = (props) => (
   <Pokemon {...props} />
 );
 
-const PokemonConnected = connect(null, mapDispatchToProps)(Container);
-
-export default PokemonConnected;
+export default connect(null, mapDispatchToProps)(PokemonContainer);

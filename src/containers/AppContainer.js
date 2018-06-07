@@ -3,18 +3,18 @@ import { connect } from 'react-redux';
 import Logo from '../components/Logo/Logo';
 import Menu from '../components/Menu/Menu';
 import { fetchPokemons } from '../actions/actions';
-import SearchInputConnected from './SearchInputConnected';
-import SearchResultsConnected from './SearchResultsConnected';
-import FilterTrayConnected from "./FilterTrayConnected";
-import SortPropertiesBoxConnected from "./SortPropertiesBoxConnected";
+import SearchInputContainer from './SearchInputContainer';
+import SearchResultsContainer from './SearchResultsContainer';
+import FilterTrayContainer from "./FilterTrayContainer";
+import SortPropertiesBoxContainer from "./SortPropertiesBoxContainer";
 import App from "../components/App/App";
-import VisibilityFiltersBoxConnected from "./VisibilityFiltersBoxConnected";
+import VisibilityFiltersBoxContainer from "./VisibilityFiltersBoxContainer";
 
 const mapDispatchToProps = dispatch => ({
   fetchPokemons: pokemons => dispatch(fetchPokemons(pokemons))
 });
 
-class Container extends Component {
+class AppContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -42,18 +42,16 @@ class Container extends Component {
     return (
       <App>
         <Logo />
-        <SearchInputConnected />
+        <SearchInputContainer />
         <Menu>
-          <VisibilityFiltersBoxConnected />
-          <SortPropertiesBoxConnected />
+          <VisibilityFiltersBoxContainer />
+          <SortPropertiesBoxContainer />
         </Menu>
-        <FilterTrayConnected />
-        <SearchResultsConnected />
+        <FilterTrayContainer />
+        <SearchResultsContainer />
       </App>
     );
   }
 }
 
-const AppConnected = connect(null, mapDispatchToProps)(Container);
-
-export default AppConnected;
+export default connect(null, mapDispatchToProps)(AppContainer);

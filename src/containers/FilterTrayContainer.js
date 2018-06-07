@@ -13,10 +13,8 @@ const mapDispatchToProps = dispatch => ({
   removeFilter: filter => dispatch(removeTypeFilter(filter))
 });
 
-const Container = (props) => (
+const FilterTrayContainer = (props) => (
   <FilterTray {...props} allFilters={PokemonTypes} colorMap={PokemonTypesToColors} />
 );
 
-const FilterTrayConnected = connect(mapStateToProps, mapDispatchToProps)(Container);
-
-export default FilterTrayConnected;
+export default connect(mapStateToProps, mapDispatchToProps)(FilterTrayContainer);
