@@ -15,9 +15,8 @@ class DropDown extends Component {
 
   render() {
     return (
-      <select
+      <select className="drop-down"
         value={this.props.selected}
-        className={this.props.className}
         ref={this.select}
         onChange={() => this.handleSortKeyChange()}>
         {
@@ -31,7 +30,6 @@ class DropDown extends Component {
 }
 
 DropDown.propTypes = {
-  className: PropTypes.string.isRequired,
   selected: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired

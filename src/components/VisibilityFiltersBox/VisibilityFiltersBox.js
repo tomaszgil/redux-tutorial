@@ -1,24 +1,16 @@
 import React from 'react';
-import CustomCheckboxConnected from "../../containers/CustomCheckboxConnected";
-import VisibilityFilters from "../../utils/VisibilityFilters";
+import PropTypes from 'prop-types';
+import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
 import './VisibilityFiltersBox.css';
 
-const VisibilityFiltersBox = () => {
-  const filtersList = [
-    VisibilityFilters.SHOW_ALL,
-    VisibilityFilters.ONLY_COLLECTED,
-    VisibilityFilters.NOT_COLLECTED
-  ];
+const VisibilityFiltersBox = (props) => (
+  <form className="visibility-filters" onSubmit={(e) => e.preventDefault()}>
+    {props.children}
+  </form>
+);
 
-  return (
-    <form className="visibility-filters" onSubmit={(e) => e.preventDefault()}>
-      {
-        filtersList.map((label, index) => (
-          <CustomCheckboxConnected key={index} id={label} label={label} />
-        ))
-      }
-    </form>
-  );
+VisibilityFiltersBox.propTypes = {
+  children: PropTypes.arrayOf(CustomCheckbox).isRequired
 };
 
 export default VisibilityFiltersBox;

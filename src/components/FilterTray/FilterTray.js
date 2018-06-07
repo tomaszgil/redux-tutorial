@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { PokemonTypes, PokemonTypesToColors } from "../../utils/Pokemon";
 import './FilterTray.css';
 
 class FilterTray extends Component {
@@ -42,12 +41,12 @@ class FilterTray extends Component {
               <span className="category-title">Pokemon Type</span>
               <span className="category-items">
               {
-                PokemonTypes.map(type => (
+                this.props.allFilters.map(type => (
                   <div
                     key={type}
                     data-name={type}
                     className={this.props.filters.includes(type) ? null : 'disabled'}
-                    style={{backgroundColor: PokemonTypesToColors[type], border: `2px solid ${PokemonTypesToColors[type]}`}}
+                    style={{backgroundColor: this.props.colorMap[type], border: `2px solid ${this.props.colorMap[type]}`}}
                     onClick={(e) => this.applyFilter(e)}>{type}
                   </div>
                 ))
@@ -62,9 +61,11 @@ class FilterTray extends Component {
 }
 
 FilterTray.propTypes = {
-  filters: PropTypes.array,
-  addFilter: PropTypes.func,
-  removeFilter: PropTypes.func
+  filters: PropTypes.array.isRequired,
+  allFilters: PropTypes.array.isRequired,
+  addFilter: PropTypes.func.isRequired,
+  removeFilter: PropTypes.func.isRequired,
+  colorMap: PropTypes.object
 };
 
 export default FilterTray;

@@ -1,0 +1,22 @@
+.sort-by {
+  display: flex;
+  flex-direction: row;
+}
+
+.sort-by div {
+  padding: 10px;
+  margin: 5px;
+  color: #bbb;
+  font-weight: 600;
+  transition: .3s;
+}
+
+@media only screen and (max-width: 768px) {
+  .sort-by {
+    flex-direction: column;
+  }
+
+  .sort-by div {
+    margin-top: 0;
+  }
+}

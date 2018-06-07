@@ -4,27 +4,5 @@
   justify-content: space-between;
   border-bottom: .15rem solid #e7e6e4;
   padding-bottom: 1rem;
-}
-
-.menu .sort-by {
-  display: flex;
-  flex-direction: row;
-}
-
-.menu .sort-by div {
-  padding: 10px;
-  margin: 5px;
-  color: #bbb;
-  font-weight: 600;
-  transition: .3s;
-}
-
-@media only screen and (max-width: 768px) {
-  .menu .sort-by {
-    flex-direction: column;
-  }
-
-  .menu .sort-by div {
-    margin-top: 0;
-  }
+  padding-left: 0;
 }
