@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CustomCheckbox from "../CustomCheckbox/CustomCheckbox";
 import './VisibilityFiltersBox.css';
 
 const VisibilityFiltersBox = (props) => (
@@ -10,7 +9,10 @@ const VisibilityFiltersBox = (props) => (
 );
 
 VisibilityFiltersBox.propTypes = {
-  children: PropTypes.arrayOf(CustomCheckbox).isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
 };
 
 export default VisibilityFiltersBox;

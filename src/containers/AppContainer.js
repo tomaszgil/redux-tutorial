@@ -9,6 +9,7 @@ import FilterTrayContainer from "./FilterTrayContainer";
 import SortPropertiesBoxContainer from "./SortPropertiesBoxContainer";
 import App from "../components/App/App";
 import VisibilityFiltersBoxContainer from "./VisibilityFiltersBoxContainer";
+import { loadData } from "../utils/localStorage";
 
 const mapDispatchToProps = dispatch => ({
   fetchPokemons: pokemons => dispatch(fetchPokemons(pokemons))
@@ -23,6 +24,8 @@ class AppContainer extends Component {
   }
 
   componentDidMount() {
+    const collectedIDs = loadData();
+
     const promise = fetch(`${this.apiURL}?apiKey=${this.apiKey}`)
       .then(blob => blob.json())
       .then(data => {
@@ -31,7 +34,7 @@ class AppContainer extends Component {
           id: element.id,
           img: element.image,
           type: element.types[0],
-          collected: false
+          collected: collectedIDs.includes(element.id)
         }));
       });
 

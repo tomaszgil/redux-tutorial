@@ -12,7 +12,10 @@ const SortPropertiesBox = (props) => (
 
 SortPropertiesBox.propTypes = {
   title: PropTypes.string.isRequired,
-  children: PropTypes.arrayOf(DropDown).isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
 };
 
 export default SortPropertiesBox;

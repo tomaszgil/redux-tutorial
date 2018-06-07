@@ -21,7 +21,7 @@ const VisibilityFiltersBoxContainer = (props) => {
   ];
 
   return (
-    <VisibilityFiltersBox >
+    <VisibilityFiltersBox>
       {
         filters.map(label => (
           <CustomCheckbox
