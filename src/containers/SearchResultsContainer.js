@@ -14,6 +14,11 @@ const mapStateToProps = state => ({
 });
 
 class SearchResultsContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.searchEngine = new SearchEngine(this.props.pokemons);
+  }
+
   prepareResults() {
     const criteria = {
       searchQuery: this.props.searchQuery,
@@ -25,8 +30,8 @@ class SearchResultsContainer extends Component {
       visibilityFilter: this.props.visibilityFilter
     };
 
-    const searchEngine = new SearchEngine(this.props.pokemons);
-    return searchEngine.apply(criteria);
+    this.searchEngine.setEntry(this.props.pokemons);
+    return this.searchEngine.apply(criteria);
   }
 
   render() {

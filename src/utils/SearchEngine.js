@@ -16,6 +16,10 @@ export default class SearchEngine {
     };
   }
 
+  setEntry(arr) {
+    this.entry = arr;
+  }
+
   _sort(arr) {
     let multiplier = 1;
     const key = this.criteria.sort.key;

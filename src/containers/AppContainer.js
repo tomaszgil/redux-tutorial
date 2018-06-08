@@ -24,7 +24,7 @@ class AppContainer extends Component {
   }
 
   componentDidMount() {
-    const collectedIDs = loadData();
+    const collectedIDs = loadData() || [];
 
     const promise = fetch(`${this.apiURL}?apiKey=${this.apiKey}`)
       .then(blob => blob.json())
